@@ -4,214 +4,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>专属你的表白</title>
+    <title>中国银行 ATM 机</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #FFEBEB;
             margin: 0;
-            background: linear-gradient(135deg, #ff7eb9, #ff65a3);
-            font-family: 'Arial', sans-serif;
-            position: relative;
+            padding: 0;
         }
 
-       .container {
+        .top-bar {
+            background-color: #CC0000;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .logo img {
+            width: 100px;
+            height: auto;
+        }
+
+        .right-info {
+            text-align: right;
+        }
+
+        .title {
+            background-color: #CC0000;
+            color: white;
             text-align: center;
-            position: relative;
-            z-index: 1;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
         }
 
-       .heart {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            background: red;
-            transform: rotate(-45deg);
-            animation: jump 0.5s infinite alternate;
-            margin: 0 auto;
-            cursor: pointer;
+        .content {
+            padding: 20px;
+            text-align: center;
         }
 
-       .heart::before,
-       .heart::after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: red;
-            border-radius: 50%;
+        .input-group {
+            margin-bottom: 20px;
         }
 
-       .heart::before {
-            top: -50px;
-            left: 0;
+        .input-group label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 5px;
         }
 
-       .heart::after {
-            left: 50px;
-            top: 0;
+        .input-group input {
+            width: 300px;
+            padding: 10px;
+            font-size: 18px;
         }
 
-        @keyframes jump {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(-20px);
-            }
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            justify-items: center;
         }
 
-       .message {
-            margin-top: 20px;
-            font-size: 24px;
+        .button-group button {
+            width: 150px;
+            padding: 10px;
+            font-size: 18px;
+            background-color: #CC0000;
             color: white;
-            animation: fadeIn 2s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-       .button-group {
-            margin-top: 30px;
-        }
-
-       .love-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: white;
-            color: red;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
-            margin: 5px;
         }
 
-       .love-button:hover {
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
-       .footer {
+        .balance {
+            font-size: 18px;
             margin-top: 20px;
-            font-size: 16px;
-            color: white;
         }
 
-        /* 新增动画背景效果 */
-       .background-stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-       .background-star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background-color: white;
-            border-radius: 50%;
-            animation: starFade 3s infinite;
-        }
-
-        @keyframes starFade {
-            0% {
-                opacity: 0;
-                transform: scale(0);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            100% {
-                opacity: 0;
-                transform: scale(0);
-            }
-        }
-
-        /* 点击按钮后的动态效果 */
-       .clicked-heart {
-            animation: heartExpand 0.5s ease forwards;
-        }
-
-        @keyframes heartExpand {
-            0% {
-                transform: rotate(-45deg) scale(1);
-            }
-
-            100% {
-                transform: rotate(-45deg) scale(1.5);
-                opacity: 0;
-            }
+        .countdown {
+            font-size: 14px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="heart"></div>
-        <div class="message">亲爱的李妍，我爱你💖</div>
-        <div class="button-group">
-            <button class="love-button" id="button1">初见于七里河</button>
-            <button class="love-button" id="button2">旅行于千岛湖</button>
-            <button class="love-button" id="button3">聆听于椰风浪琴</button>
-            <button class="love-button" id="button4">未来于水乡江南</button>
+    <div class="top-bar">
+        <div class="logo">
+            <!-- 请确保图片路径正确 -->
+            <img id="boc-logo" src="boc_logo.png" alt="中国银行 logo">
         </div>
-        <div class="footer">
-            <p>这份爱，永不停息~</p>
+        <div class="right-info">
+            <p>本机编号: 34898996</p>
+            <p>客服电话: 95566</p>
+            <p class="countdown">剩余时间: 60 秒</p>
         </div>
     </div>
-    <div class="background-stars"></div>
+    <div class="title">中国银行 ATM 机</div>
+    <div class="content" id="card-step">
+        <div class="input-group">
+            <label for="card-number">请输入卡号:</label>
+            <input type="text" id="card-number">
+        </div>
+        <button onclick="checkCard()">确认</button>
+    </div>
+    <div class="content" id="pin-step" style="display: none;">
+        <div class="input-group">
+            <label for="pin">请输入密码:</label>
+            <input type="password" id="pin">
+        </div>
+        <button onclick="checkPin()">确认</button>
+    </div>
+    <div class="content" id="transaction-step" style="display: none;">
+        <p style="font-size: 19px;">欢迎进入交易界面</p>
+        <div class="input-group">
+            <label for="amount">请输入金额:</label>
+            <input type="text" id="amount">
+        </div>
+        <div class="button-group">
+            <button onclick="showBalance()">查询余额</button>
+            <button onclick="deposit()">存款</button>
+            <button onclick="withdraw()">取款</button>
+            <button onclick="exitATM()">退出</button>
+        </div>
+        <p class="balance">当前余额: 0 元</p>
+    </div>
+
     <script>
-        // 动态添加闪烁的星星背景
-        const starCount = 100;
-        const backgroundStars = document.querySelector('.background-stars');
-        for (let i = 0; i < starCount; i++) {
-            const star = document.createElement('div');
-            star.classList.add('background-star');
-            star.style.left = `${Math.random() * 100}vw`;
-            star.style.top = `${Math.random() * 100}vh`;
-            star.style.animationDelay = `${Math.random() * 3}s`;
-            backgroundStars.appendChild(star);
+        let balance = 0;
+        let pinAttempts = 3;
+        let countdown = 60;
+        let countdownInterval;
+
+        function startCountdown() {
+            // 检查倒计时元素是否存在
+            const countdownElement = document.querySelector('.countdown');
+            if (!countdownElement) {
+                console.error('未找到倒计时元素');
+                return;
+            }
+
+            countdownInterval = setInterval(() => {
+                if (countdown > 0) {
+                    countdown--;
+                    countdownElement.textContent = `剩余时间: ${countdown} 秒`;
+                } else {
+                    clearInterval(countdownInterval);
+                    alert('操作超时，交易结束。');
+                    location.reload();
+                }
+            }, 1000);
         }
 
-        document.querySelector('.heart').addEventListener('click', function () {
-            this.classList.add('clicked-heart');
-            alert('我的心永远为你跳动！');
-            setTimeout(() => {
-                this.style.display = 'none';
-            }, 500);
-        });
+        function checkCard() {
+            const cardNumber = document.getElementById('card-number').value;
+            if (cardNumber === '6217000') {
+                document.getElementById('card-step').style.display = 'none';
+                document.getElementById('pin-step').style.display = 'block';
+            } else {
+                alert('卡号输入错误，请重新输入。');
+                document.getElementById('card-number').value = '';
+            }
+        }
 
-        document.getElementById('button1').addEventListener('click', function () {
-            alert('还记得那天，阳光正好，你走进了我的视线，我的世界从此不同。');
-        });
+        function checkPin() {
+            const pin = document.getElementById('pin').value;
+            if (pin === '123456') {
+                document.getElementById('pin-step').style.display = 'none';
+                document.getElementById('transaction-step').style.display = 'block';
+            } else {
+                pinAttempts--;
+                if (pinAttempts > 0) {
+                    alert(`密码输入错误，您还有 ${pinAttempts} 次尝试机会。`);
+                    document.getElementById('pin').value = '';
+                } else {
+                    alert('密码尝试次数已用完，交易结束。');
+                    location.reload();
+                }
+            }
+        }
 
-        document.getElementById('button2').addEventListener('click', function () {
-            alert('那些一起走过的山川湖岛，都见证了我们的爱情。');
-        });
+        function showBalance() {
+            alert(`您的当前余额为: ${balance} 元`);
+        }
 
-        document.getElementById('button3').addEventListener('click', function () {
-            alert('我曾在海南星空下许下誓言，爱你一生一世，矢志不渝。');
-        });
+        function deposit() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            if (!isNaN(amount) && amount > 0) {
+                balance += amount;
+                alert(`成功存入 ${amount} 元`);
+                document.getElementById('amount').value = '';
+                document.querySelector('.balance').textContent = `当前余额: ${balance} 元`;
+            } else {
+                alert('存款金额必须为正数，请重新输入。');
+            }
+        }
 
-        document.getElementById('button4').addEventListener('click', function () {
-            alert('未来的日子，无论风雨，我都将紧紧牵着你的手，不离不弃。');
-        });
+        function withdraw() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            if (!isNaN(amount) && amount > 0) {
+                if (amount <= balance) {
+                    balance -= amount;
+                    alert(`成功取出 ${amount} 元`);
+                    document.getElementById('amount').value = '';
+                    document.querySelector('.balance').textContent = `当前余额: ${balance} 元`;
+                } else {
+                    alert('余额不足，无法完成取款。');
+                }
+            } else {
+                alert('取款金额必须为正数，请重新输入。');
+            }
+        }
+
+        function exitATM() {
+            location.reload();
+        }
+
+        // 调试用：检查图片是否加载成功
+        const logoImg = document.getElementById('boc-logo');
+        logoImg.onerror = function () {
+            console.error('Logo 图片加载失败，请检查路径和文件是否存在');
+        };
+
+        // 页面加载完成后开始倒计时
+        window.onload = startCountdown;
     </script>
 </body>
 
