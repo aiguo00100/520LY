@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,10 +14,15 @@
             margin: 0;
             background: linear-gradient(135deg, #ff7eb9, #ff65a3);
             font-family: 'Arial', sans-serif;
+            position: relative;
         }
+
        .container {
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
+
        .heart {
             position: relative;
             width: 100px;
@@ -25,7 +31,9 @@
             transform: rotate(-45deg);
             animation: jump 0.5s infinite alternate;
             margin: 0 auto;
+            cursor: pointer;
         }
+
        .heart::before,
        .heart::after {
             content: '';
@@ -35,30 +43,49 @@
             background: red;
             border-radius: 50%;
         }
+
        .heart::before {
             top: -50px;
             left: 0;
         }
+
        .heart::after {
             left: 50px;
             top: 0;
         }
+
         @keyframes jump {
-            0% {transform: translateY(0);}
-            100% {transform: translateY(-20px);}
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-20px);
+            }
         }
+
        .message {
             margin-top: 20px;
             font-size: 24px;
             color: white;
             animation: fadeIn 2s ease-in-out;
         }
+
         @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
-       .love-button {
+
+       .button-group {
             margin-top: 30px;
+        }
+
+       .love-button {
             padding: 10px 20px;
             font-size: 16px;
             background-color: white;
@@ -67,33 +94,125 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin: 5px;
         }
+
        .love-button:hover {
             background-color: rgba(255, 255, 255, 0.8);
         }
+
        .footer {
             margin-top: 20px;
             font-size: 16px;
             color: white;
         }
+
+        /* 新增动画背景效果 */
+       .background-stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+       .background-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: white;
+            border-radius: 50%;
+            animation: starFade 3s infinite;
+        }
+
+        @keyframes starFade {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+
+        /* 点击按钮后的动态效果 */
+       .clicked-heart {
+            animation: heartExpand 0.5s ease forwards;
+        }
+
+        @keyframes heartExpand {
+            0% {
+                transform: rotate(-45deg) scale(1);
+            }
+
+            100% {
+                transform: rotate(-45deg) scale(1.5);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="heart"></div>
-        <div class="message">亲爱的[李妍]，我爱你💖</div>
-        <button class="love-button">点击我</button>
+        <div class="message">亲爱的李妍，我爱你💖</div>
+        <div class="button-group">
+            <button class="love-button" id="button1">初见于七里河</button>
+            <button class="love-button" id="button2">旅行于千岛湖</button>
+            <button class="love-button" id="button3">聆听于椰风浪琴</button>
+            <button class="love-button" id="button4">未来于水乡江南</button>
+        </div>
         <div class="footer">
             <p>这份爱，永不停息~</p>
         </div>
     </div>
+    <div class="background-stars"></div>
     <script>
-        document.querySelector('.heart').addEventListener('click', function() {
+        // 动态添加闪烁的星星背景
+        const starCount = 100;
+        const backgroundStars = document.querySelector('.background-stars');
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('background-star');
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.animationDelay = `${Math.random() * 3}s`;
+            backgroundStars.appendChild(star);
+        }
+
+        document.querySelector('.heart').addEventListener('click', function () {
+            this.classList.add('clicked-heart');
             alert('我的心永远为你跳动！');
+            setTimeout(() => {
+                this.style.display = 'none';
+            }, 500);
         });
-        document.querySelector('.love-button').addEventListener('click', function() {
-            alert('我会一直守护在你身边！');
+
+        document.getElementById('button1').addEventListener('click', function () {
+            alert('还记得那天，阳光正好，你走进了我的视线，我的世界从此不同。');
+        });
+
+        document.getElementById('button2').addEventListener('click', function () {
+            alert('那些一起走过的山川湖岛，都见证了我们的爱情。');
+        });
+
+        document.getElementById('button3').addEventListener('click', function () {
+            alert('我曾在海南星空下许下誓言，爱你一生一世，矢志不渝。');
+        });
+
+        document.getElementById('button4').addEventListener('click', function () {
+            alert('未来的日子，无论风雨，我都将紧紧牵着你的手，不离不弃。');
         });
     </script>
 </body>
+
 </html>
