@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专属你的表白</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff7eb9, #ff65a3);
+            font-family: 'Arial', sans-serif;
+        }
+       .container {
+            text-align: center;
+        }
+       .heart {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background: red;
+            transform: rotate(-45deg);
+            animation: jump 0.5s infinite alternate;
+            margin: 0 auto;
+        }
+       .heart::before,
+       .heart::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: red;
+            border-radius: 50%;
+        }
+       .heart::before {
+            top: -50px;
+            left: 0;
+        }
+       .heart::after {
+            left: 50px;
+            top: 0;
+        }
+        @keyframes jump {
+            0% {transform: translateY(0);}
+            100% {transform: translateY(-20px);}
+        }
+       .message {
+            margin-top: 20px;
+            font-size: 24px;
+            color: white;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+       .love-button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: white;
+            color: red;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+       .love-button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+       .footer {
+            margin-top: 20px;
+            font-size: 16px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart"></div>
+        <div class="message">亲爱的[李妍]，我爱你💖</div>
+        <button class="love-button">点击我</button>
+        <div class="footer">
+            <p>这份爱，永不停息~</p>
+        </div>
+    </div>
+    <script>
+        document.querySelector('.heart').addEventListener('click', function() {
+            alert('我的心永远为你跳动！');
+        });
+        document.querySelector('.love-button').addEventListener('click', function() {
+            alert('我会一直守护在你身边！');
+        });
+    </script>
+</body>
+</html>
